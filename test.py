@@ -1,7 +1,9 @@
-def my(start: int, end: int):
-    while start < end:
-        yield start
-        start +=1
+import requests
+import json
 
-for i in my(1,10):
-    print(i)
+
+
+
+requests.get('https://raw.githubusercontent.com/mledoze/countries/master/countries.json').json()
+
+
