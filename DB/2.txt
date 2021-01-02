@@ -1,0 +1,13 @@
+create table if not exists Autor(
+	Id serial primary key,
+	Name varchar(40) not null);
+create table if not exists Album (
+	Id serial primary key,
+	Id_Album integer references Autor(Id),
+	Name varchar(40) not null,
+	Year integer not null);	
+create table if not exists Track(
+	Id serial primary key,
+	Id_Album integer references Album(Id),
+	Name varchar(40) not null,
+	Duration numeric(2) not null);

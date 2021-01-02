@@ -1,0 +1,47 @@
+SELECT g.name, COUNT(a.id) FROM genre g
+	JOIN autor_genre ag ON g.id = ag.id_genre
+	JOIN autor a ON ag.id_autor = a.id
+	GROUP BY  g.name
+
+SELECT a.name, COUNT(t.id) FROM album a
+	JOIN track t ON a.id = t.id_album
+	where year >= 2019
+	GROUP BY  a.name
+
+SELECT a.name, avg(t.duration) FROM album a
+	JOIN track t ON a.id = t.id_album
+	GROUP BY  a.name
+
+SELECT distinct a.name FROM autor a
+	JOIN autor_album aa ON a.id = aa.id_autor
+	JOIN album al ON aa.id_album = al.id
+	where not year = 2020
+
+SELECT distinct c.name FROM collection c
+	JOIN track_collection tc ON c.id = tc.id_collection
+	JOIN track t ON tc.id_track = t.id
+	JOIN album al ON t.id_album = al.id
+	JOIN autor_album aa ON al.id = aa.id_album
+	JOIN autor a ON aa.id_autor = a.id
+	where a.name = 'Bon'
+
+select al.name, COUNT(g.id) from album al
+	JOIN autor_album aa ON al.id = aa.id_album
+	JOIN autor a ON aa.id_autor = a.id
+	JOIN autor_genre ag ON a.id = ag.id_autor
+	JOIN genre g ON ag.id_genre = g.id
+	group by al.name
+	HAVING COUNT(g.id) > 1
+
+SELECT t.name FROM track t
+	full outer JOIN track_collection tc ON t.id = tc.id_track
+	full outer JOIN collection c ON tc.id_collection = c.id
+	where c.name is null
+
+select a.name from track t
+	JOIN album al ON t.id_album = al.id
+	JOIN autor_album aa ON al.id = aa.id_album
+	JOIN autor a ON aa.id_autor = a.id
+	where t.duration = (select min(duration) from track)
+
+
