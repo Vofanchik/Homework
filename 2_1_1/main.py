@@ -5,4 +5,4 @@ import datetime as dt
 if __name__ == '__main__':
     get_employees()
     calculate_salary()
-    print(dt.date.today())
+    print(dt.datetime.today())
